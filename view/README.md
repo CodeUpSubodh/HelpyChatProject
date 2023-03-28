@@ -1,6 +1,11 @@
 <<<<<<< HEAD
 # Helpy-Chat
-ChatBot That provides AI solution of your questions. This project is built in team by Subodh Srivastava- Project Mentor Piyush Upadhyay- Frontend Development Ritika Singh- Frontend Devlopment Luckny Singh - Backend Devlopement
+ChatBot That provides AI solution of your questions.
+This project is built in team by
+Subodh Srivastava- Project Mentor 
+Piyush Upadhyay- Frontend Development 
+Ritika Singh- Frontend Devlopment 
+Lucky Singh - Backend Devlopement
 =======
 # Getting Started with Create React App
 

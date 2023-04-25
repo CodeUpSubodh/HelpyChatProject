@@ -1,5 +1,12 @@
+const OPENAI_API_KEY = "";  //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
+//
+//
+//
+const bcrypt = require("bcrypt");
+const compare = bcrypt.compare;
+
 const express = require("express");
-const OPENAI_API_KEY = "Enter API KEY !!!";
+const mongoose = require("mongoose");
 const { Configuration, OpenAIApi } = require("openai");
 const cors = require("cors");
 const configuration = new Configuration({
@@ -8,10 +15,64 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 
-app.use(express.json());
+// connection to database
+const mongoUrl = "mongodb://0.0.0.0:27017/HelpyChat";
+mongoose
+  .connect(mongoUrl, {
+    useNewUrlParser: true,
+  })
+  .then(() => {
+    console.log("Connected to database");
+  })
+  .catch((e) => console.log(e));
 
+require("./userDetail");
+const User = mongoose.model("UserInfo");
+
+//User SignUp
+
+app.post("/Signup", async (req, res) => {
+  const { name, email, password } = req.body;
+
+  try {
+    const oldUser = await User.findOne({ email });
+
+    if (oldUser) {
+      return res.json({ error: "User Exists" });
+    }
+    await User.create({
+      name,
+      email,
+      password,
+    });
+    res.send({ status: "ok" });
+  } catch (error) {
+    res.send({ status: "error" });
+  }
+});
+
+//User Login
+
+app.post("/Login", async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+  if (user) {
+    if (user.password === password) {
+      return res.json("Login Ok");
+    } else {
+      return res.json({ error: "Password doesn't match!" });
+    }
+  } else {
+    return res.json({ error: "User doesn't exist" });
+  }
+});
+
+
+//Handeling user question
 app.post("/chat", (req, res) => {
   const question = req.body.question;
 
@@ -43,6 +104,7 @@ app.post("/chat", (req, res) => {
   console.log({ question });
 });
 
-app.listen(3000, () => {
-  console.log("Server is listening on port 3000");
+//starting the server
+app.listen(4000, () => {
+  console.log("Server is listening on port 4000");
 });

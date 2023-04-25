@@ -1,15 +1,7 @@
 import { Link } from "react-router-dom";
-import "../CSS/Header.css"
+import "../CSS/Header.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 import React, { useState } from "react";
-
-
-
-
-// import { Link } from "react-router-dom";
-// import "./Css/Navbar.css";
-// import { FaBars, FaTimes } from "react-icons/fa";
-// import React, { useState } from "react";
 
 const Navbar = () => {
   const [click, setClick] = useState(false);
@@ -17,51 +9,46 @@ const Navbar = () => {
 
   const [color, setColor] = useState(false);
   const changeColor = () => {
-    if(window.scrollY >= 100){
-      setColor (true);
-    }
-    else{
+    if (window.scrollY >= 100) {
+      setColor(true);
+    } else {
       setColor(false);
     }
-  }
+  };
 
   window.addEventListener("scroll", changeColor);
 
   return (
     <div className={color ? "header header-bg" : "header"}>
       <Link to="/">
-       
-      <img className="logo" src={require('../Assest/logo.png')} />
-   
+        <img className="logo" src={require("../Assest/logo.png")} />
       </Link>
 
       <ul className={click ? "nav-menu active" : "nav-menu"}>
         <li>
           <div>
-          <Link to="/">Home</Link>
-
+            <Link to="/">Home</Link>
           </div>
-          
         </li>
 
         <li>
           <div>
-          <Link to="/about">About</Link>
+            <Link to="/about">About</Link>
           </div>
         </li>
         <li>
           <div>
-          <Link to="/contact">Contact</Link>
+            <Link to="/contact">Contact</Link>
           </div>
         </li>
         <li>
           <div>
-          <Link to="/Login">Login</Link>
+            <Link to="/Login">Login</Link>
           </div>
         </li>
         <li>
           <div>
-          <Link to="/Signup">Signup</Link>
+            <Link to="/Signup">Signup</Link>
           </div>
         </li>
       </ul>

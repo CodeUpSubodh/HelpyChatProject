@@ -1,84 +1,124 @@
 .chat-input {
-    display: flex;
-  }
-  
-  .chat-input input {
-    flex-grow: 1;
-  }
-  .chat-input button {
-    margin-left: 2px;
-  }
-  
-  .container {
-    display: flex;
-    margin: AUTO;
-    flex-direction: column;
-    justify-content:center;
-    height: 80vh;
-    width: 80%;
-  }
-  
-  .chats {
-    padding: 3px;
-    overflow-y:scroll;
+  display: flex;
+}
 
-    display: flex;
-    flex-direction: column;
-  }
-  .sendavtar {
-    height: 40px;
-    margin: 5px 10px 0px 0px;
-    border-top-right-radius: 0%;
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
-    border-top-left-radius: 50%;
-    border: 1px solid rgb(255, 255, 255);
-    padding: 2px;
-    background-color: rgb(228, 221, 181);
-  }
-  .reciveavtar {
-    height: 40px;
-    margin: 5px 10px 0px 0px;
-    border-top-right-radius: 50%;
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
-    border-top-left-radius: 0%;
-    border: 1px solid rgb(255, 255, 255);
-    padding: 2px;
-    background-color: rgb(228, 221, 181);
-  }
-  
-  .chat {
-    display: flex;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 10px;
-    width: 90%;
-  }
-  .chat p {
-    flex-grow: 1;
-    color: rgb(253, 253, 253);
-  }
-  
-  .send .avtar {
-    order: 1;
-  }
-  .recieve .avtar {
-    order: 0;
-  }
-  
-  .send {
-    align-self: flex-end;
-    background-color: #2b7a78;
-  }
-  .recieve {
-    background-color: #3aafa9;
-  }
-  
-  .message-text {
-    margin: 1px;
-  }
-  .chatcont{
-    margin-bottom: 10px;
-  }
-  
+.chat-input input {
+  flex-grow: 1;
+}
+.chat-input button {
+  margin-left: 2px;
+}
+
+.container {
+  display: flex;
+  margin: AUTO;
+  flex-direction: column;
+  justify-content: center;
+  height: 80vh;
+  width: 80%;
+}
+
+.chats {
+  padding: 3px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+.sendavtar {
+  height: 40px;
+  margin: 5px 10px 0px 0px;
+  border-top-right-radius: 0%;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-top-left-radius: 50%;
+  border: 1px solid rgb(255, 255, 255);
+  padding: 2px;
+  background-color: rgb(228, 221, 181);
+}
+.reciveavtar {
+  height: 40px;
+  margin: 5px 10px 0px 0px;
+  border-top-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-top-left-radius: 0%;
+  border: 1px solid rgb(255, 255, 255);
+  padding: 2px;
+  background-color: rgb(228, 221, 181);
+}
+
+.chat {
+  display: flex;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  width: 90%;
+}
+.chat p {
+  flex-grow: 1;
+  color: rgb(253, 253, 253);
+}
+
+.send .avtar {
+  order: 1;
+}
+.recieve .avtar {
+  order: 0;
+}
+
+.send {
+  align-self: flex-end;
+  background-color: #2b7a78;
+}
+.recieve {
+  background-color: #3aafa9;
+}
+
+.message-text {
+  margin: 1px;
+}
+.chatcont {
+  margin-bottom: 10px;
+}
+
+.sendavtar {
+  height: 40px;
+  margin: 5px 10px 0px 0px;
+  border-top-right-radius: 0%;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-top-left-radius: 50%;
+  border: 1px solid rgb(255, 255, 255);
+  padding: 2px;
+  background-color: rgb(228, 221, 181);
+}
+
+.reciveavtar {
+  height: 40px;
+  margin: 5px 10px 0px 0px;
+  border-top-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-top-left-radius: 0%;
+  border: 1px solid rgb(255, 255, 255);
+  padding: 2px;
+  background-color: rgb(228, 221, 181);
+}
+.dropdown {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gray;
+  opacity: .5;
+}
+
+.dropdown:empty {
+  border: none;
+}
+
+.dropdown-row {
+  cursor: pointer;
+  text-align: start;
+  margin: 2px 0;
+}

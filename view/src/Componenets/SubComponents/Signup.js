@@ -40,7 +40,7 @@ const Signup = () => {
 
   return (
     <>
-      <Header />
+   
 
       <div className="signup_container">
         <div className="signup_form_container">
@@ -99,7 +99,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      <Footer />
+   
     </>
   );
 };

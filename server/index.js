@@ -4,12 +4,16 @@ const OPENAI_API_KEY = ""; //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
 //
 const express = require("express");
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 const { Configuration, OpenAIApi } = require("openai");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 const configuration = new Configuration({
   apiKey: OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
+const JWT_SECRET =
+  "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
 
 const app = express();
 app.use(express.json());
@@ -35,6 +39,8 @@ const contact = mongoose.model("contact");
 
 app.post("/Signup", async (req, res) => {
   const { fname, lname, email, password } = req.body;
+  const encryptedPassword = await bcrypt.hash(password, 10);
+  
   try {
     const oldUser = await User.findOne({ email });
 
@@ -45,11 +51,12 @@ app.post("/Signup", async (req, res) => {
       fname,
       lname,
       email,
-      password,
+      password:encryptedPassword,
     });
-    res.send({ status: "ok" });
-  } catch (error) {
-    res.send({ status: "error" });
+    return res.send({ status: "ok"});
+  } 
+  catch (error) {
+    return res.send({ status: "err" });
   }
 });
 
@@ -57,6 +64,7 @@ app.post("/Signup", async (req, res) => {
 
 app.post("/Contact", async (req, res) => {
   const { name, email, subject, message } = req.body;
+
   try {
     await contact.create({
       name,
@@ -64,7 +72,7 @@ app.post("/Contact", async (req, res) => {
       subject,
       message,
     });
-    res.send({ status: "ok" });
+    return res.send({ status: "ok" });
   } catch (error) {
     res.send({ status: "error" });
   }
@@ -77,13 +85,19 @@ app.post("/login", async (req, res) => {
 
   const user = await User.findOne({ email });
   if (user) {
-    if (user.password === password) {
-      res.send("ok");
-    } else {
-      res.send("pass");
+    if (await bcrypt.compare(password, user.password)) {
+      const token = jwt.sign({ email: user.email }, JWT_SECRET, {
+        expiresIn: "15m",
+      });
+      if(res.status(201)){
+      return res.json({status: "ok",data:token});
+      }
+      else {
+        return res.json("pass");
+    } 
     }
   } else {
-    res.send("ne");
+    return res.send("ne");
   }
 });
 

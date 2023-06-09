@@ -24,9 +24,12 @@ const Signup = () => {
     try {
       const url = "http://localhost:4000/Signup";
       const { data: res } = await axios.post(url, data);
-	  alert("User registered")
+      if(res.status =='ok'){
+	    alert("User registered")
       navigate("/login");
-      console.log(res.message);
+      console.log(res);
+      }
+      
     } catch (error) {
       if (
         error.response &&

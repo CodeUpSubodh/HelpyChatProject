@@ -18,9 +18,11 @@ const Login = () => {
 		try {
 			const url = "http://localhost:4000/Login";
 			const { data: res } = await axios.post(url, data);
+			if(res.status=="ok"){
 			localStorage.setItem("token", res.data);
 			alert("Welcome back, you are Logged in.")
 			window.location = "/home";
+			}
 		} catch (error) {
 			if (
 				error.response &&

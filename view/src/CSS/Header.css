@@ -52,7 +52,7 @@ li :hover {
     position: absolute;
     top: 0;
     left: -100%;
-    z-index: -3;
+    z-index: 1;
     transition: 0.3s;
   }
 
@@ -68,6 +68,7 @@ li :hover {
   }
   .hamburger {
     display: initial;
+    z-index: 1;
   }
 }
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap");

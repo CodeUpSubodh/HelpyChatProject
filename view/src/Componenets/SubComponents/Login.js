@@ -1,79 +1,84 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import "../../CSS/Login.css";
+import Header from "../Header";
+import Footer from "../Footer";
 
-function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const Login = () => {
+	const [data, setData] = useState({ email: "", password: "" });
+	const [error, setError] = useState("");
 
-  const validateForm = () => {
-    let errors = {};
-    let isValid = true;
+	const handleChange = ({ currentTarget: input }) => {
+		setData({ ...data, [input.name]: input.value });
+	};
 
-    if (!username.trim()) {
-      errors.username = "Username is required";
-      isValid = false;
-    }
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const url = "http://localhost:4000/Login";
+			const { data: res } = await axios.post(url, data);
+			if(res.status=="ok"){
+			localStorage.setItem("token", res.data);
+			alert("Welcome back, you are Logged in.")
+			window.location = "/home";
+			}
+		} catch (error) {
+			if (
+				error.response &&
+				error.response.status >= 400 &&
+				error.response.status <= 500
+			) {
+				setError(error.response.data.message);
+			}
+		}
+	};
+ 
+	return (
+		<>
 
-    if (!password.trim()) {
-      errors.password = "Password is required";
-      isValid = false;
-    }
+		<div className="login_container">
+			<div className="login_form_container">
+				<div className="left">
+					<form className="form_container" onSubmit={handleSubmit}>
+						<h1>Login to Your Account</h1>
+						<input
+							type="email"
+							placeholder="Email"
+							name="email"
+							onChange={handleChange}
+							value={data.email}
+							required
+							className="input"
+						/>
+						<input
+							type="password"
+							placeholder="Password"
+							name="password"
+							onChange={handleChange}
+							value={data.password}
+							required
+							className="input"
+						/>
+						{error && <div className="error_msg">{error}</div>}
+						<button type="submit" className="green_btn">
+							Sign In
+						</button>
+					</form>
+				</div>
+				<div className="right">
+					<h1>New Here ?</h1>
+					<Link to="/signup">
+						<button type="button" className="white_btn">
+							Sign Up
+						</button>
+					</Link>
+				</div>
+			</div>
+		</div>
+		
+		</>
+	);
+};
 
-    setErrors(errors);
-
-    return isValid;
-  };
-
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (validateForm()) {
-      // Here you can make an API call to check the validity of the username and password
-      // If they are valid, set isLoggedIn to true
-      setIsLoggedIn(true);
-    }
-  };
-
-  return (
-    <div className="loginbox">
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={username}
-            onChange={handleUsernameChange}
-          />
-          {errors.username && <span className="error">{errors.username}</span>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-          {errors.password && <span className="error">{errors.password}</span>}
-        </div>
-        <button type="submit">Log In</button>
-      </form>
-    </div>
-  );
-}
-
-export default LoginPage;
+export default Login;

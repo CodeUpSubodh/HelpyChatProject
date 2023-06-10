@@ -1,18 +1,19 @@
-const OPENAI_API_KEY = "";  //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
+const OPENAI_API_KEY = ""; //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
 //
 //
 //
-const bcrypt = require("bcrypt");
-const compare = bcrypt.compare;
-
 const express = require("express");
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 const { Configuration, OpenAIApi } = require("openai");
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
 const configuration = new Configuration({
   apiKey: OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
+const JWT_SECRET =
+  "hvdvay6ert72839289()aiyg8t87qt72393293883uhefiuh78ttq3ifi78272jbkj?[]]pou89ywe";
 
 const app = express();
 app.use(express.json());
@@ -29,14 +30,17 @@ mongoose
   })
   .catch((e) => console.log(e));
 
-require("./userDetail");
+require("./userDetail.js");
 const User = mongoose.model("UserInfo");
+require("./contact.js");
+const contact = mongoose.model("contact");
 
 //User SignUp
 
 app.post("/Signup", async (req, res) => {
-  const { name, email, password } = req.body;
-
+  const { fname, lname, email, password } = req.body;
+  const encryptedPassword = await bcrypt.hash(password, 10);
+  
   try {
     const oldUser = await User.findOne({ email });
 
@@ -44,11 +48,31 @@ app.post("/Signup", async (req, res) => {
       return res.json({ error: "User Exists" });
     }
     await User.create({
+      fname,
+      lname,
+      email,
+      password:encryptedPassword,
+    });
+    return res.send({ status: "ok"});
+  } 
+  catch (error) {
+    return res.send({ status: "err" });
+  }
+});
+
+//contact us
+
+app.post("/Contact", async (req, res) => {
+  const { name, email, subject, message } = req.body;
+
+  try {
+    await contact.create({
       name,
       email,
-      password,
+      subject,
+      message,
     });
-    res.send({ status: "ok" });
+    return res.send({ status: "ok" });
   } catch (error) {
     res.send({ status: "error" });
   }
@@ -56,21 +80,26 @@ app.post("/Signup", async (req, res) => {
 
 //User Login
 
-app.post("/Login", async (req, res) => {
+app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
   if (user) {
-    if (user.password === password) {
-      return res.json("Login Ok");
-    } else {
-      return res.json({ error: "Password doesn't match!" });
+    if (await bcrypt.compare(password, user.password)) {
+      const token = jwt.sign({ email: user.email }, JWT_SECRET, {
+        expiresIn: "15m",
+      });
+      if(res.status(201)){
+      return res.json({status: "ok",data:token});
+      }
+      else {
+        return res.json("pass");
+    } 
     }
   } else {
-    return res.json({ error: "User doesn't exist" });
+    return res.send("ne");
   }
 });
-
 
 //Handeling user question
 app.post("/chat", (req, res) => {

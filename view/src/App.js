@@ -8,6 +8,7 @@ import Login from "./Componenets/SubComponents/Login";
 import FrontPage from "./Componenets/SubComponents/FrontPage";
 
 const App = () => {
+  // const user = localStorage.getItem("token");
   return (
     <>
       <Routes>

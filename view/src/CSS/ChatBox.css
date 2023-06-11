@@ -1,12 +1,23 @@
 .chat-input {
   display: flex;
+  
 }
 
 .chat-input input {
   flex-grow: 1;
+  outline: none;
+	border: none;
+	width: 370px;
+	padding: 15px;
+	border-radius: 10px;
+	background-color:rgba(9, 121, 135, 0.348);
+	margin: 5px 0;
+	font-size: 14px;
+  color: wheat;
 }
 .chat-input button {
-  margin-left: 2px;
+  padding: 1rem;
+  border-radius: 2rem;
 }
 
 .container {
@@ -121,4 +132,8 @@
   cursor: pointer;
   text-align: start;
   margin: 2px 0;
+}
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }

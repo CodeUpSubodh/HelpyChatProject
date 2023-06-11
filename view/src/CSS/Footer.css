@@ -3,9 +3,12 @@
   height: 16rem;
   margin: 0;
   padding: 1rem 0;
-  background: #0b0c10;
+  background: #141a22;
   position:auto;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
   bottom: 0;
+  
 }
 
 body {
@@ -28,6 +31,7 @@ body {
   font-size: 1.6rem;
   text-align: center;
   text-transform: small-case;
+  color: aliceblue;
 }
 
 .left {
@@ -62,7 +66,7 @@ body {
 h4 {
   font-size: 1rem;
   padding-bottom: 0.7rem;
-  color: black;
+  color: rgb(238, 231, 231);
 }
 
 p {

@@ -6,8 +6,10 @@ import Header from "../Header";
 import Footer from "../Footer";
 
 const Login = () => {
+	const[isLoggedIn,setLogin]=useState(false)
 	const [data, setData] = useState({ email: "", password: "" });
 	const [error, setError] = useState("");
+	const [userData,setUserData]=useState("");
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
@@ -20,8 +22,10 @@ const Login = () => {
 			const { data: res } = await axios.post(url, data);
 			if(res.status=="ok"){
 			localStorage.setItem("token", res.data);
+			setLogin(true)
 			alert("Welcome back, you are Logged in.")
 			window.location = "/home";
+			
 			}
 		} catch (error) {
 			if (

@@ -48,13 +48,13 @@ const Footer = () => {
           <h4>About the Project</h4>
           <p>
             <h4>
-              {" "}
+              
               Helpy Chat is a chat application designed to help people connect
               and communicate with each other in real-time. Its features include
               user registration, chat room creation, and messaging
               functionality. Helpy Chat offers many benefits, including improved
-              collaboration, enhanced productivity, and stronger relationships.{" "}
-            </h4>{" "}
+              collaboration, enhanced productivity, and stronger relationships.
+            </h4>
           </p>
 
           <div className="social">

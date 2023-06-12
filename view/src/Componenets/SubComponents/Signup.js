@@ -40,6 +40,22 @@ const Signup = () => {
       }
     }
   };
+  function matching() {
+    if (
+      document
+        .getElementById("email")
+        .value.match(
+          /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+        )
+        
+    ) {
+      document.getElementById("submit").disabled = false;
+      return;
+    } else {
+      document.getElementById("errors").innerText = "*Incorrect Email";
+      document.getElementById("submit").disabled = true;
+    }
+  }
 
   return (
     <>
@@ -77,9 +93,11 @@ const Signup = () => {
                 className="input"
               />
               <input
+                id="email"
                 type="email"
                 placeholder="Email"
                 name="email"
+                onBlur={matching}
                 onChange={handleChange}
                 value={data.email}
                 required
@@ -89,11 +107,13 @@ const Signup = () => {
                 type="password"
                 placeholder="Password"
                 name="password"
+                
                 onChange={handleChange}
                 value={data.password}
                 required
                 className="input"
               />
+              <p Id="errors"></p>
               {error && <div className="error_msg">{error}</div>}
               <button type="submit" className="white_btn">
                 Sign Up

@@ -12,7 +12,7 @@ function Home() {
     setLogin(true)
   }
   else{
-    setLogin(false)
+    setLogin(false);
   }
 });
   return (

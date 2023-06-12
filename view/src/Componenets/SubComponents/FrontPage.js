@@ -20,8 +20,8 @@ export default function FrontPage() {
     <>
       <div className="navbarforhome">
         {isLoggedIn
-        ?<Header/>
-      :<HeaderLogOut/> }
+        ?<HeaderLogOut/>
+      :<Header/> }
         <div className="contents">
           <h1 className="headingforhome">Welcome to Advanced Era of AI</h1>
           <h1 className="subheadingforhome">Why to burn yourself Out!</h1>

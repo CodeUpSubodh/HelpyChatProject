@@ -30,8 +30,9 @@
 .hamburger {
   display: none;
 }
-h1:hover {
-  color: yellow;
+a{
+  color:white;
+  text-decoration: none;
 }
 
 li :hover {
@@ -84,13 +85,13 @@ body {
   background-color: #1f2833;
 }
 
-h1,
+/* h1,
 h4,
 p,
 a {
   color: white;
   text-decoration: none;
-}
+} */
 
 ul {
   list-style-type: none;

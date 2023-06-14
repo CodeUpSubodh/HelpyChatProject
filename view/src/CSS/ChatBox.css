@@ -134,6 +134,10 @@
   margin: 2px 0;
 }
 ::-webkit-scrollbar {
-  width: 0;
-  background: transparent;
+  width: 5px;
+  background:#3aafa96c;
+  border-radius: 2rem;
+}
+::-webkit-scrollbar-track-piece{
+  border-color: #3aafa9e2;
 }

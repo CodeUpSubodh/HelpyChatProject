@@ -28,11 +28,13 @@ export default function FrontPage() {
           <h1 className="subheadingforhome">
             Get Answer of all your doubts using HelpyChat
           </h1>
-          <div className="outerbox">
+          
             <Link className="linktohome" to={"/home"}>
+            <div className="outerbox">
               HelpyChat
+              </div>
             </Link>
-          </div>
+          
         </div>
       </div>
     </>

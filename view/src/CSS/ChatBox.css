@@ -1,9 +1,12 @@
 .chat-input {
   display: flex;
+  z-index: 1;
+  
   
 }
 
 .chat-input input {
+  z-index: 1;
   flex-grow: 1;
   outline: none;
 	border: none;
@@ -14,6 +17,7 @@
 	margin: 5px 0;
 	font-size: 14px;
   color: wheat;
+  
 }
 .chat-input button {
   padding: 1rem;

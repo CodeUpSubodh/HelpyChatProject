@@ -1,13 +1,35 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "../../CSS/ChatBox.css";
+import { FaWindowClose } from "react-icons/fa";
 import axios from "axios";
+import LoginPopUp from "./LoginPopUp";
 var data = require("../../Assest/ques.json");
+
 
 const YOU = "you";
 const AI = "ai";
 
 function ChatBox() {
+  const [count,setcount]=useState(0);
   const [value, setValue] = useState("");
+  const[popup,setpopup]=useState(false);
+  useEffect(() => {
+    if(count>2){
+      if(!(window.localStorage.getItem("token"))){
+
+       setpopup(true);
+
+
+      }
+      else{
+        setpopup(false);
+      }
+  
+    }
+  },[4]);
+  function handleClose(){
+    setpopup(false);
+  }
 
   const onChange = (event) => {
     setValue(event.target.value);
@@ -28,6 +50,7 @@ function ChatBox() {
   };
 
   const handleSend = () => {
+    setcount(count+1);
     const question = inputRef.current.value;
     updateQNA(YOU, question);
 
@@ -135,6 +158,12 @@ function ChatBox() {
             ))}
         </div>
       </div>
+      <LoginPopUp trigger={popup}>
+      <div className='close' onClick={handleClose} >
+                        <FaWindowClose size={15}/>
+                    </div>
+      </LoginPopUp>
+      
     </main>
   );
 }
